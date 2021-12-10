@@ -1,17 +1,13 @@
 package common
 
-var(
-	x1 int
-	y1 int
-	x2 int
-	y2 int
-	x3 int
-	y3 int
-	x4 int
-	y4 int
-)
+//var (
+//	x1, y1 float64
+//	x2, y2 float64
+//	x3, y3 float64
+//	x4, y4 float64
+//)
 
-func CalcSlope(x1,y1,x2,y2 int) float64 {
+func CalcSlope(x1, y1, x2, y2 float64) float64 {
 	if x1 == x2 && y1 == y2 {
 		return 0
 	} else {
@@ -20,4 +16,3 @@ func CalcSlope(x1,y1,x2,y2 int) float64 {
 	}
 
 }
-

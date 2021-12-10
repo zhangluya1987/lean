@@ -2,20 +2,14 @@ package input
 
 import "fmt"
 
-var(
-	X1 int
-	Y1 int
-	X2 int
-	Y2 int
-	X3 int
-	Y3 int
-	X4 int
-	Y4 int
+var (
+	X1, Y1 float64
+	X2, Y2 float64
+	X3, Y3 float64
+	X4, Y4 float64
 )
 
-var x1 int
-
-func Input(){
+func Input() {
 	fmt.Println("请输入(空格隔开):X1 Y1")
 	fmt.Scanln(&X1, &Y1)
 	fmt.Println("请输入X2 Y2")
@@ -25,4 +19,3 @@ func Input(){
 	fmt.Println("请输入X4 Y4")
 	fmt.Scanln(&X4, &Y4)
 }
-
