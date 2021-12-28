@@ -1,4 +1,15 @@
 # 第二次作业说明
+[toc]
+
+## 助教老师辛苦了 以下是作业目录结构说明:
+```go
+1.第一个作业题代码目录
+    - homework/01.fatRate_v2.0
+
+2.第二个作业题代码目录
+    - homework/02.fatRate_UnitTesting_v1.0
+```
+
 
 ## 第一个作业
 ```go
