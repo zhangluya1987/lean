@@ -2,8 +2,8 @@
 
 ## 第一个作业
 ```go
-1.扩展功能依代码路径:
-    - https://github.com/zhangluya1987/learn/staging/src/github.com/armstrongli/go-bmi
+1.扩展功能依赖码路径:
+    - https://github.com/zhangluya1987/learn/tree/master/staging/src/github.com/armstrongli/go-bmi
 2.项目外部核心功能依赖:
     - https://github.com/armstrongli/go-bmi
 
@@ -17,7 +17,7 @@
     bmi:22.857142857142858,bfr:0.17438571428571426
 
 4.第一个作业代码直达链接:
-    - https://github.com/zhangluya1987/learn/lesson3//homework/01.fatRate_v2.0
+    - https://github.com/zhangluya1987/learn/tree/master/lesson3/homework/01.fatRate_v2.0
 ```
 
 ## 第二个作业
@@ -31,7 +31,7 @@
     录入 0 或负数体重，返回错误。
 
     // 关联代码位置
-    https://github.com/zhangluya1987/learn/lesson3/homework/02.fatRate_UnitTesting_v1.0/bmi
+    https://github.com/zhangluya1987/learn/tree/master/lesson3/homework/02.fatRate_UnitTesting_v1.0/bmi
 
     // 执行单测方式
     [jesse@infra bmi %]# go test -v .
@@ -58,10 +58,10 @@
     录入完整的性别、年龄、身高、体重，确保最终获得的健康建议符合预期。
 
     //关联代码位置
-    https://github.com/zhangluya1987/learn/lesson3/homework/02.fatRate_UnitTesting_v1.0/bfr
+    https://github.com/zhangluya1987/learn/tree/master/lesson3/homework/02.fatRate_UnitTesting_v1.0/bfr
 
     // 引用代码部分
-    https://github.com/zhangluya1987/learn/lesson3/homework/02.fatRate_UnitTesting_v1.0/suggest
+    https://github.com/zhangluya1987/learn/tree/master/lesson3/homework/02.fatRate_UnitTesting_v1.0/suggest
 
     // 执行单测方式
     [jesse@infra bfr %]# go test -v .
