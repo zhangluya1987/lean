@@ -1,18 +1,15 @@
 package main
 
-import "fmt"
-
 type Person struct {
-	targetFloor int
-	currOnFloor int
+	targetFloor []int
+	RequestPosition []int
 }
 
 type Persons struct {
-	persons []Person
+	persons []*Person
 }
 
-func (p *Person) Action(person *Person) {
-	p.targetFloor = person.targetFloor
-	p.currOnFloor = person.currOnFloor
-	fmt.Printf("我当前在%v层,我要去%v层.\n",p.currOnFloor,p.targetFloor)
+func (p *Person) RequestFloor(resActionFloor int){
+	p.RequestPosition = append(p.RequestPosition,resActionFloor)
 }
+

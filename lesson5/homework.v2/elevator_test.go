@@ -5,102 +5,74 @@ import (
 )
 
 func TestCase1(t *testing.T) {
-	// 检查楼层总高是否等于期望值
-	e := &Elevators{GetElevator(),
-	}
 
-	if totalFloor != 5 {
-		t.Errorf("期望楼层数是5,但实际是%v,不符合预期。\n", totalFloor)
+	e := &Elevators{elevators: GetElevator()}
+	if len(e.elevators.totalFloors) != 5{
+		t.Logf("总楼层期望值是5,但实际是%v,不符合预期.\n",len(e.elevators.totalFloors))
 	} else {
-		t.Logf("期望楼层数是5,实际也是%v,符合预期。\n", totalFloor)
+		t.Logf("总楼层期望值是5,实际也是%v,符合预期.\n",len(e.elevators.totalFloors))
 	}
 
-	{
-		// 检查每层楼电梯的按键状态是否都等于-1,如果是说明没人请求 电梯不动 原地维持等待状态。
-		for floor, everyFloorStatus := range e.elevator.floorsElevatorStatus {
-			if everyFloorStatus == -1{
-				t.Logf("%v楼电梯状态是%v,符合预期(-1表示每层楼都没人请求)。\n", floor+1,everyFloorStatus)
-			}else {
-				t.Errorf("%v楼电梯是%v,不符合预期(-1表示每层楼都没人请求)。\n", floor+1,everyFloorStatus)
-			}
+	for index,floor := range e.elevators.totalFloors{
+		if floor[0] != -1 {
+			t.Logf("第%v层电梯期望的状态是-1,实际是%v,不符合预期\n",index+1,floor[0])
+		}else {
+			t.Logf("第%v的电梯期望状态是-1,实际也是%v,符合预期\n",index+1,floor[0])
 		}
 	}
 }
 
-func TestCase2(t *testing.T) {
-	e := &Elevators{
-		elevator: GetElevator(),
+func TestCase2(t *testing.T){
+	e := &Elevators{elevators: GetElevator()}
+	person := &Person{
+		targetFloor:     []int{},
+		RequestPosition: []int{},
 	}
 
-	// 获取当前电梯位置
-	if e.elevator.defaultStartupPosition != 1{
-		t.Errorf("期望当前电梯位置在1层,实际电梯位置在%v层,不符合预期。\n",e.elevator.defaultStartupPosition)
-	} else{
-		t.Logf("期望当前电梯位置在1层,实际电梯位置也在%v层,符合预期。\n",e.elevator.defaultStartupPosition)
-	}
-
-	// 三楼按电梯，电梯向三楼行进，并停在三楼
-	{
-		person := &Person{
-			targetFloor: 0, // 0表示没动作 等待上电梯中
-			currOnFloor: 3,
-		}
-		e.elevator.ToGetTarget(person)
+	fakeInputRes := 3
+	person.RequestFloor(fakeInputRes)
+	e.elevators.resQueue =append(e.elevators.resQueue,fakeInputRes)
+	e.elevators.GoTo(person)
+	if len(e.elevators.resQueue) ==1 && len(e.elevators.sendQueue) == 0 {
+		t.Logf("电梯停靠在%v层,按目标楼层键的人数为%v,电梯暂停中。",e.elevators.resQueue[0],len(e.elevators.sendQueue))
 	}
 }
 
 func TestCase3(t *testing.T) {
-
-	e := &Elevators{
-		elevator: GetElevator(),
-	}
-
 	{
-
-		// 单独部分
-		fakePerson1 := &Person{
-			targetFloor: 4,
-			currOnFloor: 3,
+		e := &Elevators{elevators: GetElevator()}
+		person := &Person{
+			targetFloor:     []int{},
+			RequestPosition: []int{},
 		}
 
-		fakePerson2 := &Person{
-			targetFloor: 2,
-			currOnFloor: 3,
-		}
-
-		// 楼层有5层，电梯在3层。上来一些人后，目标楼层:4楼、2楼。电梯先向上到4楼，然后转头到2楼，最后停在2楼。
-		// 优先级未实现 求指教
-		e.elevator.ToGetTarget(fakePerson1)
-		e.elevator.ToGetTarget(fakePerson2)
+		person.RequestFloor(4)
+		person.RequestFloor(2)
+		e.elevators.LastPos(3)
+		e.elevators.sendQueue = append(e.elevators.sendQueue, person.RequestPosition...)
+		e.elevators.ChangeStatus(*person)
+		e.elevators.Schedule(person)
+		e.elevators.GoTo(person)
+		//todo 单测部分待补充
 	}
 }
 
-// 楼层有5层，电梯在3层。上来一些人后，目标楼层： 4楼、5楼、2楼。电梯先向上到4楼，然后到5楼，之后转头到2楼，最后停在2楼。
 func TestCase4(t *testing.T) {
-	e := &Elevators{
-		elevator: GetElevator(),
+	e := &Elevators{elevators: GetElevator()}
+	person := &Person{
+		targetFloor:     []int{},
+		RequestPosition: []int{},
 	}
 
 	{
-
-		fakePerson1 := &Person{
-			targetFloor: 4,
-			currOnFloor: 3,
-		}
-
-		fakePerson2 := &Person{
-			targetFloor: 5,
-			currOnFloor: 3,
-		}
-		fakePerson3 := &Person{
-			targetFloor: 2,
-			currOnFloor: 3,
-		}
-
-		// 楼层有5层，电梯在3层。上来一些人后，目标楼层:4楼、2楼。电梯先向上到4楼，然后转头到2楼，最后停在2楼。
-		// 优先级未实现 求指教
-		e.elevator.ToGetTarget(fakePerson1)
-		e.elevator.ToGetTarget(fakePerson2)
-		e.elevator.ToGetTarget(fakePerson3)
+		person.RequestFloor(4)
+		person.RequestFloor(5)
+		person.RequestFloor(2)
+		e.elevators.LastPos(3)
+		e.elevators.sendQueue = append(e.elevators.sendQueue, person.RequestPosition...)
+		e.elevators.ChangeStatus(*person)
+		e.elevators.Schedule(person)
+		e.elevators.GoTo(person)
+		//todo 单测部分待补充
 	}
 }
