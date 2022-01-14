@@ -57,6 +57,7 @@ func TestCase3(t *testing.T) {
 
 	{
 
+		// 单独部分
 		fakePerson1 := &Person{
 			targetFloor: 4,
 			currOnFloor: 3,
@@ -67,10 +68,10 @@ func TestCase3(t *testing.T) {
 			currOnFloor: 3,
 		}
 
-		//楼层有5层，电梯在3层。上来一些人后，目标楼层:4楼、2楼。电梯先向上到4楼，然后转头到2楼，最后停在2楼。
+		// 楼层有5层，电梯在3层。上来一些人后，目标楼层:4楼、2楼。电梯先向上到4楼，然后转头到2楼，最后停在2楼。
+		// 优先级未实现 求指教
 		e.elevator.ToGetTarget(fakePerson1)
 		e.elevator.ToGetTarget(fakePerson2)
-
 	}
 }
 
@@ -96,54 +97,10 @@ func TestCase4(t *testing.T) {
 			currOnFloor: 3,
 		}
 
-		//楼层有5层，电梯在3层。上来一些人后，目标楼层:4楼、2楼。电梯先向上到4楼，然后转头到2楼，最后停在2楼。
+		// 楼层有5层，电梯在3层。上来一些人后，目标楼层:4楼、2楼。电梯先向上到4楼，然后转头到2楼，最后停在2楼。
+		// 优先级未实现 求指教
 		e.elevator.ToGetTarget(fakePerson1)
 		e.elevator.ToGetTarget(fakePerson2)
 		e.elevator.ToGetTarget(fakePerson3)
-
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
-//func TestCase3(t *testing.T) {
-//	Floors := &Elevators{
-//		elevator: GetElevator(),
-//	}
-//
-//	// 1.楼层有5层，电梯在3层。上来一些人后，目标楼层:4楼、2楼。电梯先向上到4楼，然后转头到2楼，最后停在2楼。
-//	{
-//		// Floors.elevator.currPosition = 3
-//		fakePersons := Persons{persons: []Person{
-//			{
-//				targetFloor: []int{
-//					4,
-//					2,
-//				},
-//				currOnFloor: 3,
-//			},
-//
-//		}}
-//
-//		for _,person := range fakePersons.persons {
-//
-//			Floors.elevator.Direction(&person)
-//		}
-//
-//
-//	}
-//
-//}
